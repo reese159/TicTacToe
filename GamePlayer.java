@@ -2,14 +2,15 @@ import java.util.Scanner;
 
 /**
  * Plays the tic-tac-toe game. eventually, the AI will never lose.
- * @author Reese's PBC
+ * @author Reese's PBC0
  *
  */
 public class GamePlayer {
 	
+	//================================FIELDS=====================================
 	static final Scanner scan = new Scanner(System.in);
 
-	
+	//================================HELPER METHODS=====================================
 	/**
 	 * 
 	 * @return Player Location
@@ -42,7 +43,6 @@ public class GamePlayer {
 			System.out.println("You didn't answer correctly, so I'll asssume that's a no.");
 		}
 	}
-	
 	
 	/**
 	 * Create new game board
@@ -94,7 +94,6 @@ public class GamePlayer {
 			}
 			
 		}
-		
 		System.out.println(currBoard[0]+"|"+currBoard[1]+"|"+currBoard[2]);		
 		System.out.println(currBoard[3]+"|"+currBoard[4]+"|"+currBoard[5]);	
 		System.out.println(currBoard[6]+"|"+currBoard[7]+"|"+currBoard[8]);	
@@ -124,7 +123,6 @@ public class GamePlayer {
 					return true;
 				}
 			}
-			
 			//Right Diag Checker
 			if(currBoard[0] == "X" && currBoard[4] == "X" && currBoard[8] == "X") {
 				return true;
@@ -135,8 +133,6 @@ public class GamePlayer {
 				return true;
 			}
 		}
-		
-		
 		//O Win Check
 		else {
 			//Column Checker
@@ -165,16 +161,13 @@ public class GamePlayer {
 		}
 		return false;
 	}
-	
 
-	
+	//================================MAIN METHOD=====================================
 	/**
 	 * Runs the game
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//Set variables
-		boolean again = true;
 		//Show user how game works
 		gamePrelim();
 		
@@ -210,9 +203,7 @@ public class GamePlayer {
 				System.out.println("O wins!");
 			}
 		}
-		
 		scan.close();
 	}		
 	
-
 }
