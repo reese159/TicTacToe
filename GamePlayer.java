@@ -166,26 +166,26 @@ public class GamePlayer {
 		return false;
 	}
 	
+
+	
 	/**
 	 * Runs the game
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		//Set variables
-		
-		int counter = 0;
-		boolean win = false;
-		int locArray[] = new int[9];
-		String gameBoard[] = initGameBoard();
-		
+		boolean again = true;
 		//Show user how game works
 		gamePrelim();
 		
 		//Prompt User For Input & Set Input Values
+		int counter = 0;
+		boolean win = false;
+		int locArray[] = new int[9];
+		String gameBoard[] = initGameBoard();
 		while(win == false) {
 			int loc = valuePrompter();
 			locArray[0] = loc;
-		//System.out.println("Value entered: " + locArray[0]);
 			while(validityCheck(gameBoard, loc) == false) {
 				System.out.println("That move was invalid. Please try again.");
 				loc = valuePrompter();
@@ -193,6 +193,9 @@ public class GamePlayer {
 			//Update the game board with move
 			update(gameBoard, loc, counter);
 			win = winCheck(gameBoard, counter);
+			if(win == true) {
+				break;
+			}
 			counter++;
 			if(counter == 9) {
 				System.out.println("TIE GAME");
@@ -201,17 +204,15 @@ public class GamePlayer {
 		}
 		if(win == true) {
 			if(counter % 2 == 0) {
-				System.out.println("O wins!");
-				System.out.println("X = bad!");
+				System.out.println("X wins!");
 			}
 			else {
-				System.out.println("X wins!");
-				System.out.println("O = bad!");
+				System.out.println("O wins!");
 			}
 		}
-		//Close stream
+		
 		scan.close();
-	}
+	}		
 	
 
 }
