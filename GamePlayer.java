@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Plays the tic-tac-toe game. eventually, the AI will never lose.
- * @author Reese'sman imagine being fucking in blacksburg PBC
+ * @author Reese's PBC
  *
  */
 public class GamePlayer {
