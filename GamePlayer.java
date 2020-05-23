@@ -27,7 +27,7 @@ public class GamePlayer {
 	public static void gamePrelim() {
 		System.out.println("Do you want to hear the rules?");
 		System.out.println("Y/N");
-		String RuleDecision = scan.nextLine();		
+		String RuleDecision = scan.next();		
 		if(RuleDecision.equals("Y") || RuleDecision.equals("y")) {
 			System.out.println("In this game, you will be playing Tic-Tac-Toe.");
 			System.out.println("The game board is made up of a 3x3 grid with the following locations:");
@@ -162,69 +162,83 @@ public class GamePlayer {
 		return false;
 	}
 
+	
+	public static void twoPlayerGame() {
+		//Show user how game works
+				gamePrelim();
+				boolean again = true;
+				//Prompt User For Input & Set Input Values
+				while(again == true) {
+					int counter = 0;
+					boolean win = false;
+					int locArray[] = new int[9];
+					String gameBoard[] = initGameBoard();
+					while(win == false) {
+						int loc = valuePrompter();
+						locArray[0] = loc;
+						while(validityCheck(gameBoard, loc) == false) {
+							System.out.println("That move was invalid. Please try again.");
+							loc = valuePrompter();
+						}
+						//Update the game board with move
+						update(gameBoard, loc, counter);
+						win = winCheck(gameBoard, counter);
+						if(win == true) {
+							break;
+						}
+						counter++;
+						if(counter == 9) {
+							System.out.println("TIE GAME");
+							break;
+						}
+					}
+					if(win == true) {
+						if(counter % 2 == 0) {
+							System.out.println("X wins!");
+						}
+						else {
+							System.out.println("O wins!");
+						}
+					}
+					System.out.println("Would you like to play again?");
+					System.out.println("Y/N");
+					String decide = scan.next();
+					if(decide.equals("n") || decide.equals("N")) {
+						again = false;
+						System.out.println("Good Game.");
+						System.out.println("No Rematch.");
+						System.out.println("GGNOR");
+					}
+					else if(decide.equals("y") || decide.equals("Y")) {
+						again = true;
+						System.out.println("Onto the next game.");
+						System.out.println();
+					}
+					else {
+						again = false;
+						System.out.println("I'll take that as a no...");
+						System.out.println("lol cant type 4 shit");
+					}
+				}
+	}
 	//================================MAIN METHOD=====================================
 	/**
 	 * Runs the game
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//Show user how game works
-		gamePrelim();
-		boolean again = true;
-		//Prompt User For Input & Set Input Values
-		while(again == true) {
-			int counter = 0;
-			boolean win = false;
-			int locArray[] = new int[9];
-			String gameBoard[] = initGameBoard();
-			while(win == false) {
-				int loc = valuePrompter();
-				locArray[0] = loc;
-				while(validityCheck(gameBoard, loc) == false) {
-					System.out.println("That move was invalid. Please try again.");
-					loc = valuePrompter();
-				}
-				//Update the game board with move
-				update(gameBoard, loc, counter);
-				win = winCheck(gameBoard, counter);
-				if(win == true) {
-					break;
-				}
-				counter++;
-				if(counter == 9) {
-					System.out.println("TIE GAME");
-					break;
-				}
-			}
-			if(win == true) {
-				if(counter % 2 == 0) {
-					System.out.println("X wins!");
-				}
-				else {
-					System.out.println("O wins!");
-				}
-			}
-			System.out.println("Would you like to play again?");
-			System.out.println("Y/N");
-			String decide = scan.next();
-			if(decide.equals("n") || decide.equals("N")) {
-				again = false;
-				System.out.println("Good Game.");
-				System.out.println("No Rematch.");
-				System.out.println("GGNORE");
-			}
-			else if(decide.equals("y") || decide.equals("Y")) {
-				again = true;
-				System.out.println("Onto the next game.");
-				System.out.println();
-			}
-			else {
-				again = false;
-				System.out.println("I'll take that as a no...");
-				System.out.println("lol cant type 4 shit");
-			}
+		System.out.println("Would you like to play 1 player or 2 player?");
+		System.out.println("1/2");
+		int gameType = scan.nextInt();
+		if(gameType == 1) {
+			System.out.println("Not Implemented");
+		}
+		else if(gameType == 2) {
+			twoPlayerGame();
+		}
+		else {
+			System.out.println("LOL bitch can't type");
 		}
 		scan.close();
-	}		
-	
+	}
 }
