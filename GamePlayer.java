@@ -8,13 +8,14 @@ import java.util.Scanner;
 public class GamePlayer {
 	
 	static final Scanner scan = new Scanner(System.in);
+
 	
 	/**
 	 * 
 	 * @return Player Location
 	 */
 	public static int valuePrompter() {
-		System.out.println("Select a location for your X: "); //Prompt user for location selection
+		System.out.println("Select a location: "); //Prompt user for location selection
 		int location = scan.nextInt();
 		return location;
 	}
@@ -82,11 +83,16 @@ public class GamePlayer {
 	 * @param location contains the current location values containing input
 	 * @return locations in terms of a char array to be used later
 	 */
-	public static String[] update(String[] currBoard, int loc) {
+	public static String[] update(String[] currBoard, int loc, int counter) {
+		
 		for(int i = 0; i < 9; i++) {
 			if(i == loc - 1) {
-				currBoard[i] = "X";
+				if(counter % 2 == 0)
+					currBoard[i] = "X";
+				else
+					currBoard[i] = "O";
 			}
+			
 		}
 		
 		System.out.println(currBoard[0]+"|"+currBoard[1]+"|"+currBoard[2]);		
@@ -102,6 +108,8 @@ public class GamePlayer {
 	 */
 	public static void main(String[] args) {
 		//Set variables
+		int counter = 0;
+		boolean win = false;
 		int locArray[] = new int[9];
 		String gameBoard[] = initGameBoard();
 		
@@ -109,19 +117,24 @@ public class GamePlayer {
 		gamePrelim();
 		
 		//Prompt User For Input & Set Input Values
-		int loc = valuePrompter();
-		locArray[0] = loc;
+		while(win == false) {
+			int loc = valuePrompter();
+			locArray[0] = loc;
 		//System.out.println("Value entered: " + locArray[0]);
 		
 		
 		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
 		//Check if move is valid. if valid, add move
-		while(validityCheck(gameBoard, loc) == false) {
-			System.out.println("That move was invalid. Please try again.");
-			loc = valuePrompter();
+		
+			while(validityCheck(gameBoard, loc) == false) {
+				System.out.println("That move was invalid. Please try again.");
+				loc = valuePrompter();
+			}
+			//Update the game board with move
+			update(gameBoard, loc, counter);
+			counter++;
+			
 		}
-		//Update the game board with move
-		update(gameBoard, loc);
 		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
 		
 		//Close stream
