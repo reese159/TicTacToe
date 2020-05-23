@@ -103,11 +103,76 @@ public class GamePlayer {
 	}
 	
 	/**
+	 * Check if winner has been decided
+	 * @param currBoard current game board after update
+	 * @param counter to check player turn
+	 * @return win/no win
+	 */
+	public static boolean winCheck(String[] currBoard, int counter) {
+		//X Win Check
+		if(counter % 2 == 0) {
+			//Column Checker
+			for(int i = 0; i < 3; i++) {
+				if(currBoard[i] == "X" && currBoard[i+3] == "X" && currBoard[i+6] == "X") {
+					return true;
+				}
+			}
+			
+			//Row Checker
+			for(int i = 0; i < 9; i+=3) {
+				if(currBoard[i] == "X" && currBoard[i+1] == "X" && currBoard[i+2] == "X") {
+					return true;
+				}
+			}
+			
+			//Right Diag Checker
+			if(currBoard[0] == "X" && currBoard[4] == "X" && currBoard[8] == "X") {
+				return true;
+			}
+			
+			//Left Diag Checker
+			if(currBoard[2] == "X" && currBoard[4] == "X" && currBoard[6] == "X") {
+				return true;
+			}
+		}
+		
+		
+		//O Win Check
+		else {
+			//Column Checker
+			for(int i = 0; i < 3; i++) {
+				if(currBoard[i] == "O" && currBoard[i+3] == "O" && currBoard[i+6] == "O") {
+					return true;
+				}
+			}
+			
+			//Row Checker
+			for(int i = 0; i < 9; i+=3) {
+				if(currBoard[i] == "O" && currBoard[i+1] == "O" && currBoard[i+2] == "O") {
+					return true;
+				}
+			}
+			
+			//Right Diag Checker
+			if(currBoard[0] == "O" && currBoard[4] == "O" && currBoard[8] == "O") {
+				return true;
+			}
+			
+			//Left Diag Checker
+			if(currBoard[2] == "O" && currBoard[4] == "O" && currBoard[6] == "O") {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Runs the game
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		//Set variables
+		
 		int counter = 0;
 		boolean win = false;
 		int locArray[] = new int[9];
@@ -121,22 +186,29 @@ public class GamePlayer {
 			int loc = valuePrompter();
 			locArray[0] = loc;
 		//System.out.println("Value entered: " + locArray[0]);
-		
-		
-		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
-		//Check if move is valid. if valid, add move
-		
 			while(validityCheck(gameBoard, loc) == false) {
 				System.out.println("That move was invalid. Please try again.");
 				loc = valuePrompter();
 			}
 			//Update the game board with move
 			update(gameBoard, loc, counter);
+			win = winCheck(gameBoard, counter);
 			counter++;
-			
+			if(counter == 9) {
+				System.out.println("TIE GAME");
+				break;
+			}
 		}
-		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
-		
+		if(win == true) {
+			if(counter % 2 == 0) {
+				System.out.println("O wins!");
+				System.out.println("X = bad!");
+			}
+			else {
+				System.out.println("X wins!");
+				System.out.println("O = bad!");
+			}
+		}
 		//Close stream
 		scan.close();
 	}
