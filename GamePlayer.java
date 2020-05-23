@@ -170,37 +170,58 @@ public class GamePlayer {
 	public static void main(String[] args) {
 		//Show user how game works
 		gamePrelim();
-		
+		boolean again = true;
 		//Prompt User For Input & Set Input Values
-		int counter = 0;
-		boolean win = false;
-		int locArray[] = new int[9];
-		String gameBoard[] = initGameBoard();
-		while(win == false) {
-			int loc = valuePrompter();
-			locArray[0] = loc;
-			while(validityCheck(gameBoard, loc) == false) {
-				System.out.println("That move was invalid. Please try again.");
-				loc = valuePrompter();
+		while(again == true) {
+			int counter = 0;
+			boolean win = false;
+			int locArray[] = new int[9];
+			String gameBoard[] = initGameBoard();
+			while(win == false) {
+				int loc = valuePrompter();
+				locArray[0] = loc;
+				while(validityCheck(gameBoard, loc) == false) {
+					System.out.println("That move was invalid. Please try again.");
+					loc = valuePrompter();
+				}
+				//Update the game board with move
+				update(gameBoard, loc, counter);
+				win = winCheck(gameBoard, counter);
+				if(win == true) {
+					break;
+				}
+				counter++;
+				if(counter == 9) {
+					System.out.println("TIE GAME");
+					break;
+				}
 			}
-			//Update the game board with move
-			update(gameBoard, loc, counter);
-			win = winCheck(gameBoard, counter);
 			if(win == true) {
-				break;
+				if(counter % 2 == 0) {
+					System.out.println("X wins!");
+				}
+				else {
+					System.out.println("O wins!");
+				}
 			}
-			counter++;
-			if(counter == 9) {
-				System.out.println("TIE GAME");
-				break;
+			System.out.println("Would you like to play again?");
+			System.out.println("Y/N");
+			String decide = scan.next();
+			if(decide.equals("n") || decide.equals("N")) {
+				again = false;
+				System.out.println("Good Game.");
+				System.out.println("No Rematch.");
+				System.out.println("GGNORE");
 			}
-		}
-		if(win == true) {
-			if(counter % 2 == 0) {
-				System.out.println("X wins!");
+			else if(decide.equals("y") || decide.equals("Y")) {
+				again = true;
+				System.out.println("Onto the next game.");
+				System.out.println();
 			}
 			else {
-				System.out.println("O wins!");
+				again = false;
+				System.out.println("I'll take that as a no...");
+				System.out.println("lol cant type 4 shit");
 			}
 		}
 		scan.close();
