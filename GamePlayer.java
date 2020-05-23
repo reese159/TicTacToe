@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * Plays the tic-tac-toe game. eventually, the AI will never lose.
- * @author Reese's PBC0
+ * @author Reese Pelletier, Justin Briley
  *
  */
 public class GamePlayer {
@@ -27,8 +27,8 @@ public class GamePlayer {
 	public static void gamePrelim() {
 		System.out.println("Do you want to hear the rules?");
 		System.out.println("Y/N");
-		String RuleDecision = scan.next();		
-		if(RuleDecision.equals("Y") || RuleDecision.equals("y")) {
+		String RuleDecision = scan.next().toLowerCase();		
+		if(RuleDecision.equals("y")) {
 			System.out.println("In this game, you will be playing Tic-Tac-Toe.");
 			System.out.println("The game board is made up of a 3x3 grid with the following locations:");
 			System.out.println("1|2|3");		
@@ -36,7 +36,7 @@ public class GamePlayer {
 			System.out.println("7|8|9");	
 			System.out.println("In order to play the game, simply type a location and hit the enter key.");
 		}
-		else if(RuleDecision.equals("N") || RuleDecision.equals("n")) {
+		else if(RuleDecision.equals("n")) {
 			System.out.println("Well then, let's get on with the game...");
 		}
 		else {
@@ -166,6 +166,9 @@ public class GamePlayer {
 	public static void twoPlayerGame() {
 		//Show user how game works
 				gamePrelim();
+				int OWins = 0;
+				int XWins = 0;
+				int Cats = 0;
 				boolean again = true;
 				//Prompt User For Input & Set Input Values
 				while(again == true) {
@@ -188,28 +191,40 @@ public class GamePlayer {
 						}
 						counter++;
 						if(counter == 9) {
-							System.out.println("TIE GAME");
+							Cats++;
+							System.out.println("Tied");
+							System.out.println("X Wins: " + XWins);
+							System.out.println("O Wins: " + OWins);
+							System.out.println("Ties: " + Cats);	
 							break;
 						}
 					}
 					if(win == true) {
 						if(counter % 2 == 0) {
-							System.out.println("X wins!");
+							XWins++;
+							System.out.println("XvX");
+							System.out.println("X Wins: " + XWins);
+							System.out.println("O Wins: " + OWins);		
+							System.out.println("Ties: " + Cats);	
 						}
 						else {
-							System.out.println("O wins!");
+							OWins++;
+							System.out.println("OwO");
+							System.out.println("X Wins: " + XWins);
+							System.out.println("O Wins: " + OWins);
+							System.out.println("Ties: " + Cats);	
 						}
 					}
 					System.out.println("Would you like to play again?");
 					System.out.println("Y/N");
-					String decide = scan.next();
-					if(decide.equals("n") || decide.equals("N")) {
+					String decide = scan.next().toLowerCase();
+					if(decide.equals("n")) {
 						again = false;
 						System.out.println("Good Game.");
 						System.out.println("No Rematch.");
-						System.out.println("GGNOR");
+						System.out.println("GGNORE");
 					}
-					else if(decide.equals("y") || decide.equals("Y")) {
+					else if(decide.equals("y")) {
 						again = true;
 						System.out.println("Onto the next game.");
 						System.out.println();
@@ -217,7 +232,7 @@ public class GamePlayer {
 					else {
 						again = false;
 						System.out.println("I'll take that as a no...");
-						System.out.println("lol cant type 4 shit");
+				
 					}
 				}
 	}
@@ -237,7 +252,7 @@ public class GamePlayer {
 			twoPlayerGame();
 		}
 		else {
-			System.out.println("LOL bitch can't type");
+			System.out.println("No");
 		}
 		scan.close();
 	}
