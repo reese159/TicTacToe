@@ -7,15 +7,15 @@ import java.util.Scanner;
  */
 public class GamePlayer {
 	
+	static final Scanner scan = new Scanner(System.in);
+	
 	/**
 	 * 
 	 * @return Player Location
 	 */
 	public static int valuePrompter() {
-		Scanner scan = new Scanner(System.in);
 		System.out.println("Select a location for your X: "); //Prompt user for location selection
 		int location = scan.nextInt();
-		scan.close();
 		return location;
 	}
 	
@@ -23,10 +23,9 @@ public class GamePlayer {
 	 * Sets up rules for the game
 	 */
 	public static void gamePrelim() {
-		Scanner rules = new Scanner(System.in);
 		System.out.println("Do you want to hear the rules?");
 		System.out.println("Y/N");
-		String RuleDecision = rules.nextLine();		
+		String RuleDecision = scan.nextLine();		
 		if(RuleDecision.equals("Y") || RuleDecision.equals("y")) {
 			System.out.println("In this game, you will be playing Tic-Tac-Toe.");
 			System.out.println("The game board is made up of a 3x3 grid with the following locations:");
@@ -41,7 +40,40 @@ public class GamePlayer {
 		else {
 			System.out.println("You didn't answer correctly, so I'll asssume that's a no.");
 		}
-		rules.close();
+	}
+	
+	
+	/**
+	 * Create new game board
+	 * 
+	 * @return Initialized Game Board
+	 */
+	public static String[] initGameBoard() {
+		String[] initBoard = new String[9];
+		for(int i = 0; i < 9; i++) {
+			initBoard[i] = " ";
+		}
+		return initBoard;
+	}
+	
+	/**
+	 * Check if valid move
+	 * 
+	 * @param currBoard represents current locations
+	 * @param loc represents current current location
+	 * @return Valid or invalid move
+	 */
+	public static boolean validityCheck(String[] currBoard, int loc) {
+		
+		for(int i = 0; i < 9; i++) {
+			if(i == loc - 1) {
+				if(currBoard[i] == " ") {
+					return true;
+				}
+				return false;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -50,10 +82,18 @@ public class GamePlayer {
 	 * @param location contains the current location values containing input
 	 * @return locations in terms of a char array to be used later
 	 */
-	public static String[] updater(int[] location, int loc) {
-		//if()
+	public static String[] update(String[] currBoard, int loc) {
+		for(int i = 0; i < 9; i++) {
+			if(i == loc - 1) {
+				currBoard[i] = "X";
+			}
+		}
 		
-		return null;
+		System.out.println(currBoard[0]+"|"+currBoard[1]+"|"+currBoard[2]);		
+		System.out.println(currBoard[3]+"|"+currBoard[4]+"|"+currBoard[5]);	
+		System.out.println(currBoard[6]+"|"+currBoard[7]+"|"+currBoard[8]);	
+		
+		return currBoard;
 	}
 	
 	/**
@@ -63,7 +103,7 @@ public class GamePlayer {
 	public static void main(String[] args) {
 		//Set variables
 		int locArray[] = new int[9];
-		String playArray[] = new String[9];
+		String gameBoard[] = initGameBoard();
 		
 		//Show user how game works
 		gamePrelim();
@@ -71,9 +111,21 @@ public class GamePlayer {
 		//Prompt User For Input & Set Input Values
 		int loc = valuePrompter();
 		locArray[0] = loc;
-		System.out.println("Value entered: " + locArray[0]);
+		//System.out.println("Value entered: " + locArray[0]);
 		
+		
+		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
+		//Check if move is valid. if valid, add move
+		while(validityCheck(gameBoard, loc) == false) {
+			System.out.println("That move was invalid. Please try again.");
+			loc = valuePrompter();
+		}
 		//Update the game board with move
+		update(gameBoard, loc);
+		//==========================NEEDS TO BE IN WHILE LOOP: WHILE GAME IS CURRENTLY GOING==================================
+		
+		//Close stream
+		scan.close();
 	}
 	
 
