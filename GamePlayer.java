@@ -598,9 +598,7 @@ public class GamePlayer extends JFrame{
 	public static void twoPlayerGameGUI() {
 		GUIWinCondition = false;
 		twoPlayerGUIInit();
-		if(GUIWinCondition == false) {
-			buttonUpdate();
-		}
+		buttonUpdate();
 	}
 	
 	//================================MAIN METHOD=====================================
