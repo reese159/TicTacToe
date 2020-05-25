@@ -16,10 +16,15 @@ public class GamePlayer extends JFrame{
 	 * Fields
 	 */
 	static final Scanner scan = new Scanner(System.in);
-	static JFrame frame;
+	static Color background = new Color(32, 160, 230);
+	//TWO-PLAYER GUI FIELDS
+	static JFrame twoPlayerframe;
 	static JButton l1, l2, l3, l4, l5, l6, l7, l8, l9;
-	static JLabel title;
-	static JPanel win;
+	static JLabel twoPlayerTitle;
+	static JPanel twoPlayerWin;
+	static int GUIXWin = 0;
+	static int GUIOWin = 0;
+	static int GUICat = 0;
 	static int GUITurnCounter;
 	static boolean GUIWinCondition;
 	static boolean l1Clicked;
@@ -31,7 +36,17 @@ public class GamePlayer extends JFrame{
 	static boolean l7Clicked;
 	static boolean l8Clicked;
 	static boolean l9Clicked;
+	//TWO-PLAYER GAME OVER FIELDS
+	static JLabel winTalley;
+	static JButton replay, noReplay;
 	
+	static JFrame twoPlayerVicotryFrame;
+	static JLabel twoPlayerWinner;
+	static JPanel twoPlayerVictoryWin;
+	
+	static JFrame twoPlayerCATFrame;
+	static JLabel twoPlayerTie;
+	static JPanel twoPlayerCatWin;
 	//================================HELPER METHODS=====================================
 	/**
 	 * 
@@ -270,10 +285,10 @@ public class GamePlayer extends JFrame{
 	 */
 	public static void twoPlayerGUIInit() {
 		//Create frame storing game
-		frame = new JFrame("Tic-Tac-Toe");
+		twoPlayerframe = new JFrame("Tic-Tac-Toe");
 		//Label game type
 		JLabel dummy = new JLabel("");
-		title = new JLabel("         Two-Player Game");
+		twoPlayerTitle = new JLabel("         Two-Player Game");
 		//Create button grid
 		l1 = new JButton("empty");
 		l2 = new JButton("empty");
@@ -285,25 +300,24 @@ public class GamePlayer extends JFrame{
 		l8 = new JButton("empty");
 		l9 = new JButton("empty");
 		//Create game window
-		win = new JPanel();
-		win.setLayout(new GridLayout(0,3));
+		twoPlayerWin = new JPanel();
+		twoPlayerWin.setLayout(new GridLayout(0,3));
 		//Add assets & setup game window
-		win.add(l1);
-		win.add(l2);
-		win.add(l3);
-		win.add(l4);
-		win.add(l5);
-		win.add(l6);
-		win.add(l7);
-		win.add(l8);
-		win.add(l9);
-		win.add(dummy);
-		win.add(title);
-		Color background = new Color(32, 160, 230);
-		win.setBackground(background);
-		frame.add(win);
-		frame.setSize(500,450);
-		frame.setVisible(true);
+		twoPlayerWin.add(l1);
+		twoPlayerWin.add(l2);
+		twoPlayerWin.add(l3);
+		twoPlayerWin.add(l4);
+		twoPlayerWin.add(l5);
+		twoPlayerWin.add(l6);
+		twoPlayerWin.add(l7);
+		twoPlayerWin.add(l8);
+		twoPlayerWin.add(l9);
+		twoPlayerWin.add(dummy);
+		twoPlayerWin.add(twoPlayerTitle);
+		twoPlayerWin.setBackground(background);
+		twoPlayerframe.add(twoPlayerWin);
+		twoPlayerframe.setSize(500,450);
+		twoPlayerframe.setVisible(true);
 	}
 	
 	/*
@@ -366,7 +380,7 @@ public class GamePlayer extends JFrame{
 	/**
 	 * Updates game board based on button press
 	 */
-	public static void buttonUpdate() {
+	public static void twoPlayerButtonUpdate() {
 		//Set variables
 		GUITurnCounter = 0;
 		l1Clicked = false;
@@ -378,6 +392,7 @@ public class GamePlayer extends JFrame{
 		l7Clicked = false;
 		l8Clicked = false;
 		l9Clicked = false;
+		//@SuppressWarnings("unused")
 		String gameBoard[] = new String[9];
 		
 		//Action listeners based on button press
@@ -400,7 +415,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -423,7 +452,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -446,7 +489,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -470,9 +527,22 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
 					}
-				}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
+					}				}
 			}			
 		});
 		l5.addActionListener(new ActionListener() {
@@ -493,7 +563,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -516,7 +600,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -539,7 +637,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -562,7 +674,21 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
@@ -585,11 +711,87 @@ public class GamePlayer extends JFrame{
 					}
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
-						twoPlayerGUIInit();
+						if(GUITurnCounter %2 == 0) {
+							GUIOWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("O");
+						}
+						else {
+							GUIXWin++;
+							twoPlayerframe.dispose();
+							twoPlayerVictoryGUI("X");
+						}
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						twoPlayerframe.dispose();
+						twoPlayerCATGUI();
 					}
 				}
 			}			
-		});	
+		});
+	}
+	
+	/**
+	 * Handles GameOver Buttons for two-player GUI game
+	 */
+	public static void twoPlayerGameOverButtonUpdate() {
+		replay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				twoPlayerGameGUI();
+			}	
+		});
+		noReplay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}	
+		});
+	}
+
+	/**
+	 * GUI in case of victory
+	 * 
+	 * @param winner Describes the winner of the game
+	 */
+	public static void twoPlayerVictoryGUI(String winner) {
+		twoPlayerVicotryFrame = new JFrame("Game Over");
+		twoPlayerWinner = new JLabel ("The Winner is: " + winner);
+		winTalley = new JLabel("X Wins: " + GUIXWin + "   O Wins: " + GUIOWin + "   TIES: " + GUICat);
+		replay = new JButton("Play Again");
+		noReplay = new JButton("Quit");
+		twoPlayerVictoryWin = new JPanel();
+		twoPlayerVictoryWin.add(twoPlayerWinner);
+		twoPlayerVictoryWin.add(winTalley);
+		twoPlayerVictoryWin.add(replay);
+		twoPlayerVictoryWin.add(noReplay);
+		twoPlayerVictoryWin.setBackground(background);
+		twoPlayerVicotryFrame.add(twoPlayerVictoryWin);
+		twoPlayerVicotryFrame.setSize(200,150);
+		twoPlayerVicotryFrame.setVisible(true);
+		twoPlayerGameOverButtonUpdate();
+	}
+	
+	/**
+	 * GUI in case of tie
+	 */
+	public static void twoPlayerCATGUI() {
+		twoPlayerVicotryFrame = new JFrame("Game Over");
+		twoPlayerWinner = new JLabel ("CAT");
+		winTalley = new JLabel("X Wins: " + GUIXWin + "   O Wins: " + GUIOWin + "   TIES: " + GUICat);
+		replay = new JButton("Play Again");
+		noReplay = new JButton("Quit");
+		twoPlayerVictoryWin = new JPanel();
+		twoPlayerVictoryWin.add(twoPlayerWinner);
+		twoPlayerVictoryWin.add(winTalley);
+		twoPlayerVictoryWin.add(replay);
+		twoPlayerVictoryWin.add(noReplay);
+		twoPlayerVictoryWin.setBackground(background);
+		twoPlayerVicotryFrame.add(twoPlayerVictoryWin);
+		twoPlayerVicotryFrame.setSize(200,150);
+		twoPlayerVicotryFrame.setVisible(true);
+		twoPlayerGameOverButtonUpdate();
 	}
 	
 	/**
@@ -598,7 +800,7 @@ public class GamePlayer extends JFrame{
 	public static void twoPlayerGameGUI() {
 		GUIWinCondition = false;
 		twoPlayerGUIInit();
-		buttonUpdate();
+		twoPlayerButtonUpdate();
 	}
 	
 	//================================MAIN METHOD=====================================
