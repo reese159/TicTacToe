@@ -100,6 +100,14 @@ public class TicTacToeGame extends JFrame{
 						System.exit(0);
 					}	
 				});
+				
+				onePlayer.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						System.out.println("NOT YET IMPLEMENTED");
+						System.exit(0);
+					}	
+				});
 			}
 			
 			/**
