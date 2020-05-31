@@ -1,7 +1,12 @@
 import java.util.Scanner;
+import java.util.Random;
+import java.awt.event.*; 
+import java.awt.*; 
+import javax.swing.*;
 
 /**
- * Single player tic-tac-toe with unbeatable AI
+ * Single player tic-tac-toe competent AI
+ * ONLY WAY TO WIN IS CREATE A FORKING PATH
  * @author Reese Pelletier, Justin Briley
  *
  */
@@ -93,11 +98,11 @@ public class TicTacToeAIGame{
 	 * @param location contains the current location values containing input
 	 * @return locations in terms of a char array to be used later
 	 */
-	public static String[] update(String[] currBoard, int loc, int counter) {
+	public static String[] update(String[] currBoard, int loc, int counter, int playerTurn) {
 		
 		for(int i = 0; i < 9; i++) {
 			if(i == loc - 1) {
-				if(counter % 2 == 0)
+				if(playerTurn == 0)
 					currBoard[i] = "X";
 				else
 					currBoard[i] = "O";
@@ -121,22 +126,33 @@ public class TicTacToeAIGame{
 	@SuppressWarnings("null")
 	public static int aiStrat(String[] currBoard) {
 		//check 1
-		
+		if(check1(currBoard) != 0) {
+			return check1(currBoard);
+		}
 		//check 2
-		
+		if(check2(currBoard) != 0) {
+			return check2(currBoard);
+		}
 		//check 3
-		
+		//FORK NOT IMPLEMENTED
 		//check 4
-		
+		//FORK BLOCK NOT IMPLEMENTED
 		//check 5
-		
+		if(check5(currBoard) != 0) {
+			return check5(currBoard);
+		}
 		//check 6
-		
+		if(check6(currBoard) != 0) {
+			return check6(currBoard);
+		}
 		//check 7
-		
+		if(check7(currBoard) != 0) {
+			return check7(currBoard);
+		}
 		//check 8
-		
-		//check 9
+		if(check8(currBoard) != 0) {
+			return check8(currBoard);
+		}
 		
 		return (Integer) null;
 	}
@@ -147,34 +163,222 @@ public class TicTacToeAIGame{
 	 * @param currBoard current game board
 	 * @return Use/Don't Use
 	 */
-	public static boolean check1(String[] currBoard) {
-		//Column Checker
-		for(int i = 0; i < 3; i++) {
-			if(currBoard[i] == "O" && currBoard[i+3] == "O") {
-				return true;
+	public static int check1(String[] currBoard) {
+		 //Column Checker
+        for(int i = 0; i < 3; i++) {
+            if(currBoard[i] == "O" && currBoard[i+3] == "O" && currBoard[i+6] == " ") {
+                return i + 7;
+            }
+            else if(currBoard[i+3] == "O" && currBoard[i+6] == "O" && currBoard[i] == " ") {
+                return i + 1;
+            }
+            else if (currBoard[i] == "O" && currBoard[i+6] == "O" && currBoard[i + 3] == " ") {
+                return i + 4;
+            }
+        }
+
+    //Row Checker
+        for(int i = 0; i < 9; i+=3) {
+            if(currBoard[i] == "O" && currBoard[i+1] == "O" && currBoard[i+2] == " ") {
+                return i + 3;
+            }
+            else if(currBoard[i+1] == "O" && currBoard[i+2] == "O" && currBoard[i] == " ") {
+                return i + 1;
+            }
+            else if(currBoard[i] == "O" && currBoard[i+2] == "O" && currBoard[i + 1] == " ") {
+                return i + 2;
+            }
+        }
+
+        //Right Diag Checker
+        if(currBoard[0] == "O" && currBoard[4] == "O" && currBoard[8] == " ") {
+            return 9;
+        }
+
+        if(currBoard[4] == "O" && currBoard[8] == "O" && currBoard[0] == " ") {
+            return 1;
+        }
+
+        if (currBoard[0] == "O" && currBoard[8] == "O" && currBoard[4] == " ") {
+            return 5;
+        }
+
+        //Left Diag Checker
+        if(currBoard[2] == "O" && currBoard[4] == "O" && currBoard[6] == " ") {
+            return 7;
+        }
+
+        if (currBoard[4] == "O" && currBoard[6] == "O" && currBoard[2] == " ") {
+            return 3;
+        }
+
+        if (currBoard[2] == "O" && currBoard[6] == "O" && currBoard[4] == " ") {
+            return 5;
+        }
+        return 0;
+	}
+	
+	/**
+	 * Check if losing is currently possible
+	 * 
+	 * @param currBoard current game board
+	 * @return Use/Don't Use
+	 */
+	public static int check2(String[] currBoard) {
+        //Column Checker
+        for(int i = 0; i < 3; i++) {
+            if(currBoard[i] == "X" && currBoard[i+3] == "X" && currBoard[i+6] == " ") {
+                return i + 7;
+            }
+            else if(currBoard[i+3] == "X" && currBoard[i+6] == "X" && currBoard[i] == " ") {
+                return i + 1;
+            }
+            else if (currBoard[i] == "X" && currBoard[i+6] == "X" && currBoard[i + 3] == " ") {
+                return i + 4;
+            }
+        }
+
+    //Row Checker
+        for(int i = 0; i < 9; i+=3) {
+            if(currBoard[i] == "X" && currBoard[i+1] == "X" && currBoard[i+2] == " ") {
+                return i + 3;
+            }
+            else if(currBoard[i+1] == "X" && currBoard[i+2] == "X" && currBoard[i] == " ") {
+                return i + 1;
+            }
+            else if(currBoard[i] == "X" && currBoard[i+2] == "X" && currBoard[i + 1] == " ") {
+                return i + 2;
+            }
+        }
+
+        //Right Diag Checker
+        if(currBoard[0] == "X" && currBoard[4] == "X" && currBoard[8] == " ") {
+            return 9;
+        }
+
+        if(currBoard[4] == "X" && currBoard[8] == "X" && currBoard[0] == " ") {
+            return 1;
+        }
+
+        if (currBoard[0] == "X" && currBoard[8] == "X" && currBoard[4] == " ") {
+            return 5;
+        }
+
+        //Left Diag Checker
+        if(currBoard[2] == "X" && currBoard[4] == "X" && currBoard[6] == " ") {
+            return 7;
+        }
+
+        if (currBoard[4] == "X" && currBoard[6] == "X" && currBoard[2] == " ") {
+            return 3;
+        }
+
+        if (currBoard[2] == "X" && currBoard[6] == "X" && currBoard[4] == " ") {
+            return 5;
+        }
+        return 0;
+    }
+	
+	/**
+	 * Check if center is played
+	 * 
+	 * @param currBoard current game board
+	 * @return Use/Don't Use
+	 */
+	public static int check5(String[] currBoard) {
+		if(currBoard[4].equals(" ")) {
+			return 5;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Check if opposite corner has been played
+	 * Block Corners
+	 * 
+	 * @param currBoard current game board
+	 * @return Use/Don't Use
+	 */
+	public static int check6(String[] currBoard) {
+		if(currBoard[0].equals("X") && currBoard[8].equals(" ")) {
+			return 9;
+		}
+		else if(currBoard[8].equals("X") && currBoard[0].equals(" ")) {
+			return 1;
+		}
+		else if(currBoard[2].equals("X") && currBoard[6].equals(" ")) {
+			return 7;
+		}
+		else if(currBoard[6].equals("X") && currBoard[2].equals(" ")) {
+			return 3;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Check if corner has been played
+	 * Play corners
+	 * 
+	 * @param currBoard current game board
+	 * @return Use/Don't Use
+	 */
+	public static int check7(String[] currBoard) {
+		Random rand = new Random();
+		int loc = rand.nextInt(4);
+		if(loc == 0) {
+			if(currBoard[0].equals(" ")) {
+				return 1;
 			}
-			else if(currBoard[i+3] == "O" && currBoard[i+6] == "O") {
-				return true;
+		}
+		if(loc == 1) {
+			if(currBoard[2].equals(" ")) {
+				return 3;
 			}
 		}
-		
-		//Row Checker
-		for(int i = 0; i < 9; i+=3) {
-			if(currBoard[i] == "O" && currBoard[i+1] == "O" && currBoard[i+2] == "O") {
-				return true;
+		if(loc == 2) {
+			if(currBoard[6].equals(" ")) {
+				return 7;
 			}
 		}
-		
-		//Right Diag Checker
-		if(currBoard[0] == "O" && currBoard[4] == "O" && currBoard[8] == "O") {
-			return true;
+		if(loc == 3) {
+			if(currBoard[8].equals(" ")) {
+				return 9;
+			}
 		}
-		
-		//Left Diag Checker
-		if(currBoard[2] == "O" && currBoard[4] == "O" && currBoard[6] == "O") {
-			return true;
+		return 0;
+	}
+	
+	/**
+	 * Check if side has been played
+	 * Play sides
+	 * 
+	 * @param currBoard current game board
+	 * @return Use/Don't Use
+	 */
+	public static int check8(String[] currBoard) {
+		Random rand = new Random();
+		int loc = rand.nextInt(4);
+		if(loc == 0) {
+			if(currBoard[1].equals(" ")) {
+				return 2;
+			}
 		}
-		return false;
+		if(loc == 1) {
+			if(currBoard[3].equals(" ")) {
+				return 4;
+			}
+		}
+		if(loc == 2) {
+			if(currBoard[5].equals(" ")) {
+				return 6;
+			}
+		}
+		if(loc == 3) {
+			if(currBoard[7].equals(" ")) {
+				return 8;
+			}
+		}
+		return 0;
 	}
 	
  	/**
@@ -183,9 +387,9 @@ public class TicTacToeAIGame{
 	 * @param counter to check player turn
 	 * @return win/no win
 	 */
-	public static boolean winCheck(String[] currBoard, int counter) {
+	public static boolean winCheck(String[] currBoard, int counter, int player) {
 		//X Win Check
-		if(counter % 2 == 0) {
+		if(player == 0) {
 			//Column Checker
 			for(int i = 0; i < 3; i++) {
 				if(currBoard[i] == "X" && currBoard[i+3] == "X" && currBoard[i+6] == "X") {
@@ -244,6 +448,9 @@ public class TicTacToeAIGame{
 	public static void onePlayerGame() {
 		//Show user how game works
 		//Set Initial Variables
+		Random rand = new Random();
+		int player = rand.nextInt(2);
+		int winner = 0;
 		int OWins = 0;
 		int XWins = 0;
 		int Cats = 0;
@@ -257,31 +464,92 @@ public class TicTacToeAIGame{
 			String gameBoard[] = initGameBoard();
 			//Game play
 			while(win == false) {
-				int loc = valuePrompter();
-				locArray[0] = loc;
-				while(validityCheck(gameBoard, loc) == false) {
-					System.out.println("That move was invalid. Please try again.");
-					loc = valuePrompter();
+				//====================PLAYER 1 GOES FIRST====================
+				if(player == 0) {
+					int loc = valuePrompter();
+					locArray[0] = loc;
+					while(validityCheck(gameBoard, loc) == false) {
+						System.out.println("That move was invalid. Please try again.");
+						loc = valuePrompter();
+					}
+					
+					//Update the game board with move
+					gameBoard = update(gameBoard, loc, counter, 0);
+					win = winCheck(gameBoard, counter, 0);
+					if(win == true) {
+						winner = 1;
+						break;
+					}
+					counter++;
+					if(counter == 9) {
+						Cats++;
+						System.out.println("Tied");
+						System.out.println("X Wins: " + XWins);
+						System.out.println("O Wins: " + OWins);
+						System.out.println("Ties: " + Cats);	
+						break;
+					}
+					gameBoard = update(gameBoard, aiStrat(gameBoard), counter, 1);
+					win = winCheck(gameBoard, counter, 1);
+					if(win == true) {
+						winner = 2;
+						break;
+					}
+					counter++;
+					if(counter == 9) {
+						Cats++;
+						System.out.println("Tied");
+						System.out.println("X Wins: " + XWins);
+						System.out.println("O Wins: " + OWins);
+						System.out.println("Ties: " + Cats);	
+						break;
+					}
 				}
-				//Update the game board with move
-				update(gameBoard, loc, counter);
-				win = winCheck(gameBoard, counter);
-				if(win == true) {
-					break;
-				}
-				counter++;
-				if(counter == 9) {
-					Cats++;
-					System.out.println("Tied");
-					System.out.println("X Wins: " + XWins);
-					System.out.println("O Wins: " + OWins);
-					System.out.println("Ties: " + Cats);	
-					break;
+				//====================AI GOES FIRST====================
+				if(player == 1) {
+					gameBoard = update(gameBoard, aiStrat(gameBoard), counter, 1);
+					win = winCheck(gameBoard, counter, 1);
+					if(win == true) {
+						winner = 2;
+						break;
+					}
+					counter++;
+					if(counter == 9) {
+						Cats++;
+						System.out.println("Tied");
+						System.out.println("X Wins: " + XWins);
+						System.out.println("O Wins: " + OWins);
+						System.out.println("Ties: " + Cats);	
+						break;
+					}
+					int loc = valuePrompter();
+					locArray[0] = loc;
+					while(validityCheck(gameBoard, loc) == false) {
+						System.out.println("That move was invalid. Please try again.");
+						loc = valuePrompter();
+					}
+					
+					//Update the game board with move
+					gameBoard = update(gameBoard, loc, counter, 0);
+					win = winCheck(gameBoard, counter, 0);
+					if(win == true) {
+						winner = 1;
+						break;
+					}
+					counter++;
+					if(counter == 9) {
+						Cats++;
+						System.out.println("Tied");
+						System.out.println("X Wins: " + XWins);
+						System.out.println("O Wins: " + OWins);
+						System.out.println("Ties: " + Cats);	
+						break;
+					}
 				}
 			}
 			//Declare Winner
 			if(win == true) {
-				if(counter % 2 == 0) {
+				if(winner == 1) {
 					XWins++;
 					System.out.println("XvX");
 					System.out.println("X Wins: " + XWins);
@@ -309,6 +577,7 @@ public class TicTacToeAIGame{
 				System.exit(0);
 			}
 			else if(decide.equals("y")) {
+				player = rand.nextInt(2);
 				again = true;
 				System.out.println("Onto the next game.");
 				System.out.println();
