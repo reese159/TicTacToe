@@ -13,7 +13,17 @@ import javax.swing.*;
 public class TicTacToeAIGame{
 	
 	//============================FIELDS==============================================
+	//Start menu fields
+	static JFrame startFrame;
+	static JButton onePlayer, twoPlayer, quit;
+	static JLabel GamePlay;
+	static JCheckBox hackerButton;
+	static JPanel startWin;
+	static int gameType = 0;
+	static boolean hackerMode = false;
+	//General Fields
 	static final Scanner scan = new Scanner(System.in);
+	//
 	static JFrame onePlayerframe;
 	static JButton l1, l2, l3, l4, l5, l6, l7, l8, l9;
 	static JLabel onePlayerTitle;
@@ -22,6 +32,79 @@ public class TicTacToeAIGame{
 	
 	
 	//================================MAIN METHOD=====================================	
+	/**
+	 * Set up initial window for game selection
+	 */
+	public static void startMenu() {
+		startFrame = new JFrame("Start Menu");
+		GamePlay = new JLabel ("Tic-Tac-Toe Game");
+		onePlayer = new JButton("Single-Player");
+		twoPlayer = new JButton("Two-Player");
+		quit = new JButton("Quit");
+		hackerButton = new JCheckBox("Hacker Mode");
+		startWin = new JPanel();
+		startWin.add(GamePlay);
+		startWin.add(onePlayer);
+		startWin.add(twoPlayer);
+		startWin.add(quit);
+		startWin.add(hackerButton);
+		startWin.setBackground(background);
+		startFrame.add(startWin);
+		startFrame.setSize(150,200);
+		startFrame.setVisible(true);
+		startMenuUpdate();
+	}
+	
+	/**
+	 * Updates start menu to initialize game
+	 */
+	public static void startMenuUpdate() {
+		twoPlayer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(hackerButton.isSelected() == false) {
+					//twoPlayerGameGUI();
+					startFrame.dispose();
+				}
+				else {
+					startFrame.dispose();
+					//twoPlayerGame();
+				}
+			}	
+		});
+		quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}	
+		});
+		
+		onePlayer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(hackerButton.isSelected() == false) {
+					onePlayerGUIInit();
+					startFrame.dispose();
+				}
+				else {
+					startFrame.dispose();
+					onePlayerGame();
+				}
+			}	
+		});
+	}
+	
+	/**
+	 * Initializes the start menu
+	 */
+	public static void startMenuInit() {
+		startMenu();
+		startMenuUpdate();
+	}
+	
+	
+	
+	//===================================ONE-PLAYER METHODS=====================================
 	/**
 	 * Runs the game
 	 * @param args
@@ -145,11 +228,11 @@ public class TicTacToeAIGame{
 		//FORK BLOCK NOT IMPLEMENTED
 		//check 5
 		if(check3(currBoard) != 0) {
-			return check5(currBoard);
+			return check3(currBoard);
 		}
 		//check 6
 		if(check4(currBoard) != 0) {
-			return check6(currBoard);
+			return check4(currBoard);
 		}
 		//check 7
 		if(check5(currBoard) != 0) {
@@ -362,29 +445,31 @@ public class TicTacToeAIGame{
 	 * @return Use/Don't Use
 	 */
 	public static int check6(String[] currBoard) {
-		Random rand = new Random();
-		int loc = rand.nextInt(4);
-		if(loc == 0) {
-			if(currBoard[1].equals(" ")) {
-				return 2;
+		while(true) {
+			Random rand = new Random();
+			int loc = rand.nextInt(4);
+			if(loc == 0) {
+				if(currBoard[1].equals(" ")) {
+					return 2;
+				}
+			}
+			if(loc == 1) {
+				if(currBoard[3].equals(" ")) {
+					return 4;
+				}
+			}
+			if(loc == 2) {
+				if(currBoard[5].equals(" ")) {
+					return 6;
+				}
+			}
+			if(loc == 3) {
+				if(currBoard[7].equals(" ")) {
+					return 8;
+				}
 			}
 		}
-		if(loc == 1) {
-			if(currBoard[3].equals(" ")) {
-				return 4;
-			}
-		}
-		if(loc == 2) {
-			if(currBoard[5].equals(" ")) {
-				return 6;
-			}
-		}
-		if(loc == 3) {
-			if(currBoard[7].equals(" ")) {
-				return 8;
-			}
-		}
-		return 0;
+		//return 0;
 	}
 	
  	/**
@@ -478,7 +563,6 @@ public class TicTacToeAIGame{
 						System.out.println("That move was invalid. Please try again.");
 						loc = valuePrompter();
 					}
-					
 					//Update the game board with move
 					gameBoard = update(gameBoard, loc, counter, 0);
 					win = winCheck(gameBoard, counter, 0);
@@ -495,6 +579,7 @@ public class TicTacToeAIGame{
 						System.out.println("Ties: " + Cats);	
 						break;
 					}
+					System.out.println("");
 					gameBoard = update(gameBoard, aiStrat(gameBoard), counter, 1);
 					win = winCheck(gameBoard, counter, 1);
 					if(win == true) {
@@ -510,6 +595,7 @@ public class TicTacToeAIGame{
 						System.out.println("Ties: " + Cats);	
 						break;
 					}
+					System.out.println("");
 				}
 				//====================AI GOES FIRST====================
 				if(player == 1) {
@@ -528,6 +614,7 @@ public class TicTacToeAIGame{
 						System.out.println("Ties: " + Cats);	
 						break;
 					}
+					System.out.println("");
 					int loc = valuePrompter();
 					locArray[0] = loc;
 					while(validityCheck(gameBoard, loc) == false) {
@@ -551,6 +638,7 @@ public class TicTacToeAIGame{
 						System.out.println("Ties: " + Cats);	
 						break;
 					}
+					System.out.println("");
 				}
 			}
 			//Declare Winner
