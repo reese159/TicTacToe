@@ -14,6 +14,11 @@ public class TicTacToeAIGame{
 	
 	//============================FIELDS==============================================
 	static final Scanner scan = new Scanner(System.in);
+	static JFrame onePlayerframe;
+	static JButton l1, l2, l3, l4, l5, l6, l7, l8, l9;
+	static JLabel onePlayerTitle;
+	static JPanel onePlayerWin;
+	static Color background = new Color(32, 160, 230);
 	
 	
 	//================================MAIN METHOD=====================================	
@@ -22,6 +27,7 @@ public class TicTacToeAIGame{
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		onePlayerGUIInit();
 		onePlayerGame();
 	}
 	
@@ -138,20 +144,20 @@ public class TicTacToeAIGame{
 		//check 4
 		//FORK BLOCK NOT IMPLEMENTED
 		//check 5
-		if(check5(currBoard) != 0) {
+		if(check3(currBoard) != 0) {
 			return check5(currBoard);
 		}
 		//check 6
-		if(check6(currBoard) != 0) {
+		if(check4(currBoard) != 0) {
 			return check6(currBoard);
 		}
 		//check 7
-		if(check7(currBoard) != 0) {
-			return check7(currBoard);
+		if(check5(currBoard) != 0) {
+			return check5(currBoard);
 		}
 		//check 8
-		if(check8(currBoard) != 0) {
-			return check8(currBoard);
+		if(check6(currBoard) != 0) {
+			return check6(currBoard);
 		}
 		
 		return (Integer) null;
@@ -285,7 +291,7 @@ public class TicTacToeAIGame{
 	 * @param currBoard current game board
 	 * @return Use/Don't Use
 	 */
-	public static int check5(String[] currBoard) {
+	public static int check3(String[] currBoard) {
 		if(currBoard[4].equals(" ")) {
 			return 5;
 		}
@@ -299,7 +305,7 @@ public class TicTacToeAIGame{
 	 * @param currBoard current game board
 	 * @return Use/Don't Use
 	 */
-	public static int check6(String[] currBoard) {
+	public static int check4(String[] currBoard) {
 		if(currBoard[0].equals("X") && currBoard[8].equals(" ")) {
 			return 9;
 		}
@@ -322,7 +328,7 @@ public class TicTacToeAIGame{
 	 * @param currBoard current game board
 	 * @return Use/Don't Use
 	 */
-	public static int check7(String[] currBoard) {
+	public static int check5(String[] currBoard) {
 		Random rand = new Random();
 		int loc = rand.nextInt(4);
 		if(loc == 0) {
@@ -355,7 +361,7 @@ public class TicTacToeAIGame{
 	 * @param currBoard current game board
 	 * @return Use/Don't Use
 	 */
-	public static int check8(String[] currBoard) {
+	public static int check6(String[] currBoard) {
 		Random rand = new Random();
 		int loc = rand.nextInt(4);
 		if(loc == 0) {
@@ -590,4 +596,43 @@ public class TicTacToeAIGame{
 			}
 		}
 	}
+	
+	public static void onePlayerGUIInit() {
+		//Create frame storing game
+		onePlayerframe = new JFrame("Tic-Tac-Toe");
+		//Label game type
+		JLabel dummy = new JLabel("");
+		onePlayerTitle = new JLabel("         One-Player Game");
+		//Create button grid
+		l1 = new JButton("empty");
+		l2 = new JButton("empty");
+		l3 = new JButton("empty");
+		l4 = new JButton("empty");
+		l5 = new JButton("empty");
+		l6 = new JButton("empty");
+		l7 = new JButton("empty");
+		l8 = new JButton("empty");
+		l9 = new JButton("empty");
+		//Create game window
+		onePlayerWin = new JPanel();
+		onePlayerWin.setLayout(new GridLayout(0,3));
+		//Add assets & setup game window
+		onePlayerWin.add(l1);
+		onePlayerWin.add(l2);
+		onePlayerWin.add(l3);
+		onePlayerWin.add(l4);
+		onePlayerWin.add(l5);
+		onePlayerWin.add(l6);
+		onePlayerWin.add(l7);
+		onePlayerWin.add(l8);
+		onePlayerWin.add(l9);
+		onePlayerWin.add(dummy);
+		onePlayerWin.add(onePlayerTitle);
+		onePlayerWin.setBackground(background);
+		onePlayerframe.add(onePlayerWin);
+		onePlayerframe.setSize(500,450);
+		onePlayerframe.setVisible(true);
+	}
+	
+	
 }
