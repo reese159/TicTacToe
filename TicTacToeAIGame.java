@@ -21,95 +21,39 @@ public class TicTacToeAIGame{
 	static JPanel startWin;
 	static int gameType = 0;
 	static boolean hackerMode = false;
-	//General Fields
+	//General use fields
 	static final Scanner scan = new Scanner(System.in);
-	//
+	static Color background = new Color(32, 160, 230);
+	//one-player GUI fields
 	static JFrame onePlayerframe;
 	static JButton l1, l2, l3, l4, l5, l6, l7, l8, l9;
 	static JLabel onePlayerTitle;
 	static JPanel onePlayerWin;
-	static Color background = new Color(32, 160, 230);
-	
-	
-	//================================MAIN METHOD=====================================	
-	/**
-	 * Set up initial window for game selection
-	 */
-	public static void startMenu() {
-		startFrame = new JFrame("Start Menu");
-		GamePlay = new JLabel ("Tic-Tac-Toe Game");
-		onePlayer = new JButton("Single-Player");
-		twoPlayer = new JButton("Two-Player");
-		quit = new JButton("Quit");
-		hackerButton = new JCheckBox("Hacker Mode");
-		startWin = new JPanel();
-		startWin.add(GamePlay);
-		startWin.add(onePlayer);
-		startWin.add(twoPlayer);
-		startWin.add(quit);
-		startWin.add(hackerButton);
-		startWin.setBackground(background);
-		startFrame.add(startWin);
-		startFrame.setSize(150,200);
-		startFrame.setVisible(true);
-		startMenuUpdate();
-	}
-	
-	/**
-	 * Updates start menu to initialize game
-	 */
-	public static void startMenuUpdate() {
-		twoPlayer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(hackerButton.isSelected() == false) {
-					//twoPlayerGameGUI();
-					startFrame.dispose();
-				}
-				else {
-					startFrame.dispose();
-					//twoPlayerGame();
-				}
-			}	
-		});
-		quit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}	
-		});
-		
-		onePlayer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(hackerButton.isSelected() == false) {
-					onePlayerGUIInit();
-					startFrame.dispose();
-				}
-				else {
-					startFrame.dispose();
-					onePlayerGame();
-				}
-			}	
-		});
-	}
-	
-	/**
-	 * Initializes the start menu
-	 */
-	public static void startMenuInit() {
-		startMenu();
-		startMenuUpdate();
-	}
-	
+	static int GUIXWin = 0;
+	static int GUIOWin = 0;
+	static int GUICat = 0;
+	static int GUITurnCounter;
+	static boolean GUIWinCondition;
+	static boolean l1Clicked;
+	static boolean l2Clicked;
+	static boolean l3Clicked;
+	static boolean l4Clicked;
+	static boolean l5Clicked;
+	static boolean l6Clicked;
+	static boolean l7Clicked;
+	static boolean l8Clicked;
+	static boolean l9Clicked;
+	//one-player game over fields
+	static JLabel winTalley;
+	static JButton replay, noReplay;
+	static JFrame onePlayerVicotryFrame;
+	static JLabel onePlayerWinner;
+	static JPanel onePlayerVictoryWin;
+	static JFrame onePlayerCATFrame;
+	static JLabel onePlayerTie;
+	static JPanel onePlayerCatWin;
+
 	//===================================ONE-PLAYER METHODS=====================================
-	/**
-	 * Runs the game
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		startMenu();
-	}
 	
 	/**
 	 * 
@@ -202,7 +146,7 @@ public class TicTacToeAIGame{
 	}
 	
 	/**
-	 * Implementation of AI strategy to always win
+	 * Implementation of AI strategy
 	 * Uses basic order-of-operations strategy
 	 * 
 	 * @param currBoard current game board
@@ -468,7 +412,7 @@ public class TicTacToeAIGame{
 		//return 0;
 	}
 	
- 	/**
+	/**
 	 * Check if winner has been decided
 	 * @param currBoard current game board after update
 	 * @param counter to check player turn
@@ -530,7 +474,7 @@ public class TicTacToeAIGame{
 	}
 	
 	/**
-	 * Two player game
+	 * one player game
 	 */
 	public static void onePlayerGame() {
 		//Show user how game works
@@ -681,6 +625,546 @@ public class TicTacToeAIGame{
 		}
 	}
 	
+	/*
+	 * Check if win in GUI
+	 * 
+	 * @param location contains the current location values containing input
+	 * @return locations in terms of a char array to be used later
+	 */
+	public static boolean winCheckGUI(String[] currBoard, int counter) {
+		//X Win Check
+		for(int i = 0; i < 3; i++) {
+			if(currBoard[i] == "X" && currBoard[i+3] == "X" && currBoard[i+6] == "X") {
+				return true;
+			}
+		}
+		
+		//Row Checker
+		for(int i = 0; i < 9; i+=3) {
+			if(currBoard[i] == "X" && currBoard[i+1] == "X" && currBoard[i+2] == "X") {
+				return true;
+			}
+		}
+		//Right Diag Checker
+		if(currBoard[0] == "X" && currBoard[4] == "X" && currBoard[8] == "X") {
+			return true;
+		}
+		
+		//Left Diag Checker
+		if(currBoard[2] == "X" && currBoard[4] == "X" && currBoard[6] == "X") {
+			return true;
+		}
+	//O Win Check
+		//Column Checker
+		for(int i = 0; i < 3; i++) {
+			if(currBoard[i] == "O" && currBoard[i+3] == "O" && currBoard[i+6] == "O") {
+				return true;
+			}
+		}
+		
+		//Row Checker
+		for(int i = 0; i < 9; i+=3) {
+			if(currBoard[i] == "O" && currBoard[i+1] == "O" && currBoard[i+2] == "O") {
+				return true;
+			}
+		}
+		
+		//Right Diag Checker
+		if(currBoard[0] == "O" && currBoard[4] == "O" && currBoard[8] == "O") {
+			return true;
+		}
+		
+		//Left Diag Checker
+		if(currBoard[2] == "O" && currBoard[4] == "O" && currBoard[6] == "O") {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Update Game Window As Game Progresses
+	 */
+	public static void onePlayerGameButtonUpdate() {
+		//Set variables
+		GUITurnCounter = 0;
+		l1Clicked = false;
+		l2Clicked = false;
+		l3Clicked = false;
+		l4Clicked = false;
+		l5Clicked = false;
+		l6Clicked = false;
+		l7Clicked = false;
+		l8Clicked = false;
+		l9Clicked = false;
+		
+		//0 = player
+		//1 = AI
+		Random rand = new Random();
+		int player = rand.nextInt(2);
+		
+		//@SuppressWarnings("unused")
+		String gameBoard[] = initGameBoard();
+		
+		//AI first move
+		if(player == 0) {
+			onePlayerGUIAI(gameBoard);
+		}
+		
+		l1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l1Clicked == false) {
+					//Player Turn
+					l1.setText("X");
+					GUITurnCounter++;
+					l1Clicked = true;
+					gameBoard[0] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});	
+		l2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l2Clicked == false) {
+					//Player Turn
+					l2.setText("X");
+					GUITurnCounter++;
+					l2Clicked = true;
+					gameBoard[1] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l3Clicked == false) {
+					//Player Turn
+					l3.setText("X");
+					GUITurnCounter++;
+					l3Clicked = true;
+					gameBoard[2] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l4Clicked == false) {
+					//Player Turn
+					l4.setText("X");
+					GUITurnCounter++;
+					l4Clicked = true;
+					gameBoard[3] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}			
+				}
+			}			
+		});
+		l5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l5Clicked == false) {
+					//Player Turn
+					l5.setText("X");
+					GUITurnCounter++;
+					l5Clicked = true;
+					gameBoard[4] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l6.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l6Clicked == false) {
+					//Player Turn
+					l6.setText("X");
+					GUITurnCounter++;
+					l6Clicked = true;
+					gameBoard[5] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l7.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l7Clicked == false) {
+					//Player Turn
+					l7.setText("X");
+					GUITurnCounter++;
+					l7Clicked = true;
+					gameBoard[6] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l8.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l8Clicked == false) {
+					//Player Turn
+					l8.setText("X");
+					GUITurnCounter++;
+					l8Clicked = true;
+					gameBoard[7] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+		l9.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(l9Clicked == false) {
+					//Player Turn
+					l9.setText("X");
+					GUITurnCounter++;
+					l9Clicked = true;
+					gameBoard[8] = "X";
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIXWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("X");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+					//AI Turn
+					onePlayerGUIAI(gameBoard);
+					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
+					if(GUIWinCondition == true) {
+						GUIOWin++;
+						onePlayerframe.dispose();
+						onePlayerVictoryGUI("O");
+					}
+					else if(GUITurnCounter == 9) {
+						GUICat++;
+						onePlayerframe.dispose();
+						onePlayerCATGUI();
+					}
+				}
+			}			
+		});
+	}
+	
+	/**
+	 * Update game board as AI makes move
+	 * 
+	 * @param currBoard Current game state
+	 * @return New game state
+	 */
+	public static String[] onePlayerGUIAI(String[] currBoard){
+		int decision = aiStrat(currBoard);
+		if(decision == 1) {
+			currBoard[0] = "O";
+			l1.setText("O");
+			l1Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 2) {
+			currBoard[1] = "O";
+			l2.setText("O");
+			l2Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 3) {
+			currBoard[2] = "O";
+			l3.setText("O");
+			l3Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 4) {
+			currBoard[3] = "O";
+			l4.setText("O");
+			l4Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 5) {
+			currBoard[4] = "O";
+			l5.setText("O");
+			l5Clicked = true;
+			GUITurnCounter++;
+		}
+				
+		else if(decision == 6) {
+			currBoard[5] = "O";
+			l6.setText("O");
+			l6Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 7) {
+			currBoard[6] = "O";
+			l7.setText("O");
+			l7Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 8) {
+			currBoard[7] = "O";
+			l8.setText("O");
+			l8Clicked = true;
+			GUITurnCounter++;
+		}
+		else if(decision == 9) {
+			currBoard[8] = "O";
+			l9.setText("O");
+			l9Clicked = true;
+			GUITurnCounter++;
+		}
+		return currBoard;
+	}
+	
+	/*
+	 * Handles GameOver Buttons for one-player GUI game
+	 */
+	public static void onePlayerGameOverButtonUpdate() {
+		replay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				onePlayerGameGUI();
+			}	
+		});
+		noReplay.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}	
+		});
+	}
+
+	/**
+	 * GUI in case of victory
+	 * 
+	 * @param winner Describes the winner of the game
+	 */
+	public static void onePlayerVictoryGUI(String winner) {
+		onePlayerVicotryFrame = new JFrame("Game Over");
+		onePlayerWinner = new JLabel ("The Winner is: " + winner);
+		winTalley = new JLabel("X Wins: " + GUIXWin + "   O Wins: " + GUIOWin + "   TIES: " + GUICat);
+		replay = new JButton("Play Again");
+		noReplay = new JButton("Quit");
+		onePlayerVictoryWin = new JPanel();
+		onePlayerVictoryWin.add(onePlayerWinner);
+		onePlayerVictoryWin.add(winTalley);
+		onePlayerVictoryWin.add(replay);
+		onePlayerVictoryWin.add(noReplay);
+		onePlayerVictoryWin.setBackground(background);
+		onePlayerVicotryFrame.add(onePlayerVictoryWin);
+		onePlayerVicotryFrame.setSize(200,150);
+		onePlayerVicotryFrame.setVisible(true);
+		onePlayerGameOverButtonUpdate();
+	}
+	
+	/**
+	 * GUI in case of tie
+	 */
+	public static void onePlayerCATGUI() {
+		onePlayerVicotryFrame = new JFrame("Game Over");
+		onePlayerWinner = new JLabel ("CAT");
+		winTalley = new JLabel("X Wins: " + GUIXWin + "   O Wins: " + GUIOWin + "   TIES: " + GUICat);
+		replay = new JButton("Play Again");
+		noReplay = new JButton("Quit");
+		onePlayerVictoryWin = new JPanel();
+		onePlayerVictoryWin.add(onePlayerWinner);
+		onePlayerVictoryWin.add(winTalley);
+		onePlayerVictoryWin.add(replay);
+		onePlayerVictoryWin.add(noReplay);
+		onePlayerVictoryWin.setBackground(background);
+		onePlayerVicotryFrame.add(onePlayerVictoryWin);
+		onePlayerVicotryFrame.setSize(200,150);
+		onePlayerVicotryFrame.setVisible(true);
+		onePlayerGameOverButtonUpdate();
+	}
+	
 	/**
 	 * Initiate GUI for single player game
 	 */
@@ -719,6 +1203,15 @@ public class TicTacToeAIGame{
 		onePlayerframe.add(onePlayerWin);
 		onePlayerframe.setSize(500,450);
 		onePlayerframe.setVisible(true);
+	}
+	
+	/*
+	 * Handles GUI-Based game play
+	 */
+	public static void onePlayerGameGUI() {
+		GUIWinCondition = false;
+		onePlayerGUIInit();
+		onePlayerGameButtonUpdate();
 	}
 	
 }
