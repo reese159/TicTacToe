@@ -12,6 +12,6 @@ public class GamePlayer{
 	 */
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		TicTacToeGame Game = new TicTacToeGame();
+		TicTacToeGameMenu Game = new TicTacToeGameMenu();
 	}
 }
