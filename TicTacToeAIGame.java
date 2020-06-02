@@ -102,16 +102,13 @@ public class TicTacToeAIGame{
 		startMenuUpdate();
 	}
 	
-	
-	
 	//===================================ONE-PLAYER METHODS=====================================
 	/**
 	 * Runs the game
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		onePlayerGUIInit();
-		onePlayerGame();
+		startMenu();
 	}
 	
 	/**
@@ -179,7 +176,6 @@ public class TicTacToeAIGame{
 		}
 		return false;
 	}
-	
 	
 	/**
 	 * Update the game board & metadata
@@ -685,6 +681,9 @@ public class TicTacToeAIGame{
 		}
 	}
 	
+	/**
+	 * Initiate GUI for single player game
+	 */
 	public static void onePlayerGUIInit() {
 		//Create frame storing game
 		onePlayerframe = new JFrame("Tic-Tac-Toe");
@@ -721,6 +720,5 @@ public class TicTacToeAIGame{
 		onePlayerframe.setSize(500,450);
 		onePlayerframe.setVisible(true);
 	}
-	
 	
 }
