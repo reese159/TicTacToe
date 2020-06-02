@@ -1,3 +1,4 @@
+package GameCollection;
 import java.util.Scanner;
 import java.util.Random;
 import java.awt.event.*; 
@@ -723,12 +724,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -736,12 +737,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -759,12 +760,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -772,12 +773,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -795,12 +796,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -808,12 +809,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -831,12 +832,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -844,12 +845,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}			
 				}
@@ -867,12 +868,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -880,12 +881,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -903,12 +904,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -916,12 +917,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -939,12 +940,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -952,12 +953,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -975,12 +976,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -988,12 +989,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -1011,12 +1012,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIXWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("X");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 					//AI Turn
@@ -1024,12 +1025,12 @@ public class TicTacToeAIGame{
 					GUIWinCondition = winCheckGUI(gameBoard, GUITurnCounter);
 					if(GUIWinCondition == true) {
 						GUIOWin++;
-						onePlayerframe.dispose();
+						
 						onePlayerVictoryGUI("O");
 					}
 					else if(GUITurnCounter == 9) {
 						GUICat++;
-						onePlayerframe.dispose();
+						
 						onePlayerCATGUI();
 					}
 				}
@@ -1110,6 +1111,8 @@ public class TicTacToeAIGame{
 		replay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				onePlayerframe.dispose();
+				onePlayerVicotryFrame.dispose();
 				onePlayerGameGUI();
 			}	
 		});
