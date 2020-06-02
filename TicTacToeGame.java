@@ -1,3 +1,4 @@
+package GameCollection;
 import java.util.Scanner; 
 import java.awt.event.*; 
 import java.awt.*; 
@@ -412,18 +413,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -449,18 +450,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -486,18 +487,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -524,18 +525,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}				}
 				}			
@@ -560,18 +561,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -597,18 +598,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -634,18 +635,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -671,18 +672,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -708,18 +709,18 @@ public class TicTacToeGame extends JFrame{
 						if(GUIWinCondition == true) {
 							if(GUITurnCounter %2 == 0) {
 								GUIOWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("O");
 							}
 							else {
 								GUIXWin++;
-								twoPlayerframe.dispose();
+								
 								twoPlayerVictoryGUI("X");
 							}
 						}
 						else if(GUITurnCounter == 9) {
 							GUICat++;
-							twoPlayerframe.dispose();
+							
 							twoPlayerCATGUI();
 						}
 					}
@@ -734,6 +735,8 @@ public class TicTacToeGame extends JFrame{
 			replay.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					twoPlayerframe.dispose();
+					twoPlayerVicotryFrame.dispose();
 					twoPlayerGameGUI();
 				}	
 			});
@@ -798,6 +801,4 @@ public class TicTacToeGame extends JFrame{
 			twoPlayerButtonUpdate();
 		}
 		
-		//===================================ONE-PLAYER METHODS=====================================
-			
 }
